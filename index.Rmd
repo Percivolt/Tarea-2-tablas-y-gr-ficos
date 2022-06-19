@@ -65,7 +65,7 @@ colnames(estad_policial) = c("Delito",
                              "Cantón")
 estad_policial %>%
   datatable(options = list(
-    pageLength = 10,
+    pageLength = 5,
     language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
   ))
 ```  
