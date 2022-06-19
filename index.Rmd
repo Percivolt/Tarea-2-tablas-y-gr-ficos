@@ -51,7 +51,7 @@ estad_policial = subset(
 )
 ```  
 
-## **Tabla de Datos**  
+## **Tabla de datos**  
 
 ```{r, Tabla de datos, message=FALSE, warning=FALSE}  
 
@@ -89,7 +89,7 @@ ggplotly(Graf1) %>%
   config(locale = 'es')
 ```  
 
-## **Gráfico con la cantidad de Delitos por mes** 
+## **Gráfico con la cantidad de delitos por mes** 
 
 ```{r, Segundo gráfico, message=FALSE, warning=FALSE}  
 
@@ -125,7 +125,7 @@ ggplotly (Graf2) %>%
   config(locale = 'es')
 ```  
 
-## **Gráfico con la Proporcion de delitos según el género**  
+## **Gráfico con la proporcion de delitos según el género**  
 
 ```{r, Tercer gráfico, message=FALSE, warning=FALSE}  
 
