@@ -82,7 +82,7 @@ Graf1 <-
   coord_flip() +
   ggtitle("cantidad de delitos en Costa Rica según el tipo de delito") +
   xlab("Delito cometido") +
-  ylab("Cantidad de Delitos")
+  ylab("Cantidad de delitos")
   
 
 ggplotly(Graf1) %>% 
@@ -119,7 +119,7 @@ Graf2 <-
   geom_bar(stat = "identity") +
   ggtitle("Cantidad de delitos por mes") +
   xlab("Meses") +
-  ylab("Cantidad de Delito")
+  ylab("Cantidad de delitos")
 
 ggplotly (Graf2) %>% 
   config(locale = 'es')
