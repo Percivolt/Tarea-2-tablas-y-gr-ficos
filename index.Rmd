@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## **Presentación**  
 
-Segunda tarea de Procesamiento de Datos Geográficos, la cual tiene como finalidad desarrollar tablas y gráficos estadísticos interactivos a partir de las estadisticas policiales del año 2021 proporcionadas por la [página web de datos abiertos del Organismo de Investigación Juficial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)  
+Segunda tarea de Procesamiento de Datos Geográficos, la cual tiene como finalidad desarrollar tablas y gráficos estadísticos interactivos a partir de las estadisticas policiales del año 2021 proporcionadas por la [página web de datos abiertos del Organismo de Investigación Judicial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)  
   
 ## **Paquetes utilizados en este proyecto**  
 
