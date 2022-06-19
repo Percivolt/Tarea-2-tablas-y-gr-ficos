@@ -70,7 +70,7 @@ estad_policial %>%
   ))
 ```  
 
-## **Gráfico con la cantidad de delitos segun el tipo de delito**  
+## **Gráfico con la cantidad de delitos según el tipo de delito**  
 
 ```{r, Primer gráfico, message=FALSE, warning=FALSE}  
 
@@ -80,7 +80,7 @@ Graf1 <-
   ggplot(aes(x = reorder(Delito, n), y = n)) +
   geom_bar(stat = "identity") +
   coord_flip() +
-  ggtitle("cantidad de delitos en Costa Rica segun el tipo de delito") +
+  ggtitle("cantidad de delitos en Costa Rica según el tipo de delito") +
   xlab("Delito cometido") +
   ylab("Cantidad de Delitos")
   
@@ -117,7 +117,7 @@ Graf2 <-
     x = reorder(nombres_estad, meses), y = n
   ))) +
   geom_bar(stat = "identity") +
-  ggtitle("Cantidad de Delitos por mes") +
+  ggtitle("Cantidad de delitos por mes") +
   xlab("Meses") +
   ylab("Cantidad de Delito")
 
@@ -125,7 +125,7 @@ ggplotly (Graf2) %>%
   config(locale = 'es')
 ```  
 
-## **Gráfico con la proporcion de delitos según el género**  
+## **Gráfico con la proporción de delitos según el género**  
 
 ```{r, Tercer gráfico, message=FALSE, warning=FALSE}  
 
@@ -135,7 +135,7 @@ Graf3 <-
   geom_bar(position = "fill") +
   coord_flip() +
   labs(fill = "Género") +
-  ggtitle("Proporcion de delitos según el género") +
+  ggtitle("Proporción de delitos según el género") +
   xlab("Tipo de delito") +
   ylab("Proporción")
   
