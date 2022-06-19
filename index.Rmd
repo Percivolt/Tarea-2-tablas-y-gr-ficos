@@ -1,0 +1,166 @@
+---
+title: "Estadisticas policiales del año 2021"
+author: "Pedro Báez Marín"
+date: '2022-06-14'
+output:
+  html_document:
+    code_folding: hide
+    theme: readable
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Presentación**  
+
+Segunda tarea de Procesamiento de Datos Geográficos, la cual tiene como finalidad desarrollar tablas y gráficos estadísticos interactivos a partir de las estadisticas policiales del año 2021 proporcionadas por la [página web de datos abiertos del Organismo de Investigación Juficial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)  
+  
+## **Paquetes utilizados en este proyecto**  
+
+```{r Librerias, message=FALSE}  
+
+library(ggplot2)
+library(readxl)
+library(plotly)
+library(dplyr)
+library(sf)
+library(DT)
+```
+
+```{r, Lectura del archivo xls, message=FALSE, echo=FALSE, warning=FALSE}  
+
+estad_policial <-
+  read_excel("estadisticaspoliciales2021.xls")
+estad_policial = subset(
+  estad_policial,
+  select = c(
+    "Delito",
+    "Fecha",
+    "Victima",
+    "Edad",
+    "Genero",
+    "Provincia",
+    "Canton"
+  )
+)
+```  
+
+## **Tabla de Datos**  
+
+```{r, Tabla de datos, message=FALSE, warning=FALSE}  
+
+estad_policial$Fecha = as.Date(estad_policial$Fecha)
+colnames(estad_policial) = c("Delito",
+                             "Fecha",
+                             "Víctima",
+                             "Edad",
+                             "Género",
+                             "Provincia",
+                             "Cantón")
+estad_policial %>%
+  datatable(options = list(
+    pageLength = 10,
+    language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+  ))
+```  
+
+## **Gráfico con la cantidad de delitos segun el tipo de delito**  
+
+```{r, Primer gráfico, message=FALSE, warning=FALSE}  
+
+Graf1 <-
+  estad_policial %>%
+  count(Delito) %>%
+  ggplot(aes(x = reorder(Delito, n), y = n)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  ggtitle("cantidad de delitos en Costa Rica segun el tipo de delito") +
+  xlab("Delito cometido") +
+  ylab("Cantidad de Delitos")
+  
+
+ggplotly(Graf1) %>% 
+  config(locale = 'es')
+```  
+
+## **Gráfico con la cantidad de Delitos por mes** 
+
+```{r, Segundo gráfico, message=FALSE, warning=FALSE}  
+
+Graf2 <-
+  estad_policial %>% mutate(meses = lubridate::month(Fecha))
+nombres_estad <-
+  c(
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre"
+  )
+
+Graf2 <-
+  Graf2 %>%
+  count(meses) %>%
+  ggplot(level = levelorder, (aes(
+    x = reorder(nombres_estad, meses), y = n
+  ))) +
+  geom_bar(stat = "identity") +
+  ggtitle("Cantidad de Delitos por mes") +
+  xlab("Meses") +
+  ylab("Cantidad de Delito")
+
+ggplotly (Graf2) %>% 
+  config(locale = 'es')
+```  
+
+## **Gráfico con la Proporcion de delitos según el género**  
+
+```{r, Tercer gráfico, message=FALSE, warning=FALSE}  
+
+Graf3 <-
+  estad_policial %>%
+  ggplot(aes(x = Delito, fill = Género)) +
+  geom_bar(position = "fill") +
+  coord_flip() +
+  labs(fill = "Género") +
+  ggtitle("Proporcion de delitos según el género") +
+  xlab("Tipo de delito") +
+  ylab("Proporción")
+  
+  
+ggplotly(Graf3) %>% 
+  config(locale = 'es')
+```  
+
+## **Gráfico con la cantidad de delitos en determinados cantones**  
+
+```{r, Cuarto gráfico, message=FALSE, warning=FALSE}  
+
+graf4 <-
+  estad_policial %>%
+  count(Cantón) %>%
+  filter(Cantón == "SAN JOSE" |
+           Cantón == "ALAJUELA" |
+           Cantón == "CARTAGO" | 
+           Cantón == "HEREDIA") %>%
+  ggplot(aes(x = reorder(Cantón, n), y = n)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Delitos en los cantones de San José, Alajuela, Cartago y Heredia") +
+  xlab("Cantón") +
+  ylab("Cantidad")
+
+ggplotly(graf4) %>% 
+  config(locale = 'es')
+```
